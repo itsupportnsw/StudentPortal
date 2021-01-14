@@ -1,0 +1,22 @@
+version: "3.5" # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  student-portal-app:
+    container_name: student_portal_app
+    image: nginx
+    ports:
+      - 8885:80
+      - 18885:433
+    volumes:
+      - ./WebApp:/usr/share/nginx/html
+
+  student-portal-node-app: #name of the second service
+    container_name: student-portal-node-app
+    build: ./NodeServer # specify the directory of the Dockerfile
+    ports:
+      - 3000:3000 #specify ports forewarding
+    volumes:
+      - ./NodeServer:/usr/src/app
+    command: >
+      bash -c "npm install && npm start --host 0.0.0.0 -port 3000"
