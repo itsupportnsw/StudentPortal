@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // set listener to login button
   $("#loginBtn").click(async function () {
     let data = {
       studentID: $("#studentID").val(),

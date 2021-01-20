@@ -32,14 +32,8 @@ router.get("/", (req, res) => {
 
 router.get("/get/all", (req, res) => {
   // create sql command
-  var sql = "SELECT * FROM Enrolments";
-  // query data
-  query(sql, function (record) {
-    // create dataset from  callback data
-    var data = record.recordset;
-    // send data back
-    res.send(data);
-  });
+
+  res.send("All user data");
 });
 
 router.post("/getUserPermission", (req, res) => {
