@@ -3,6 +3,7 @@ const Joi = require("joi"); // use for validation
 const express = require("express");
 const router = express.Router();
 const dbConfig = require("../config/db");
+var mssql = require("mssql");
 
 // Body Parser Middleware
 router.use(express.json());
@@ -38,20 +39,47 @@ router.get("/get/all", (req, res) => {
 
 router.post("/getUserPermission", (req, res) => {
   let student = req.body;
+  dbConfig.database = "AIC";
 
-  if (student.studentID == "AIC0001" && student.email == "") {
-    res.status(200).send({
-      error: false,
-      message: "get user permission successfully.",
-      data: student,
-    });
-  } else {
-    res.status(200).send({
-      error: true,
-      message: "This user not match with database.",
-      data: [],
-    });
-  }
+  // get data from database
+  new mssql.ConnectionPool(dbConfig).connect().then((pool) => {
+    // =========
+    var request = pool.request();
+
+    // input variable
+    request.input("studentID", mssql.VarChar, student.studentID);
+    request.input("email", mssql.VarChar, student.email);
+
+    // execute get user info
+    request
+      .query(
+        "SELECT ID AS id, StudentID AS studentID, FullName AS fullName, EmailAddress AS emailAddress, AustraliaPhone AS phone, OverDue AS overdueAmount, Photo_DOCDATA AS photoData FROM STUDENT WHERE (StudentID = @studentID) AND (EmailAddress = @email)"
+      )
+      .then((result) => {
+        // return row affected back
+        res.status(200);
+
+        if (result.recordset.length > 0) {
+          res.send({
+            error: false,
+            message: "get user permission successfully.",
+            data: { studentDetail: result.recordset[0] },
+          });
+        } else {
+          res.status(200).send({
+            error: true,
+            message: "This user is not in database.",
+          });
+        }
+
+        mssql.close();
+      })
+      .catch((error) => {
+        res.send(error);
+        console.log(error);
+        mssql.close();
+      });
+  });
 });
 
 // function validateEnrolment(enrolment) {
