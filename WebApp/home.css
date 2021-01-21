@@ -1,0 +1,17 @@
+.navbar{
+    color: #a36060;
+    background-color: #021e2c;
+}
+
+h3 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 40px 8px 10px 8px;
+    color: #a16161;
+}
+body{
+    background-color: rgb(219, 218, 216);
+}
