@@ -5,7 +5,7 @@ $(document).ready(function () {
       email: $("#email").val(),
     };
 
-    // fetch student permission from api server
+    fetch student permission from api server
     const response = await fetch(
       "http://localhost:3000/api/v1/users/getUserPermission",
       {
@@ -21,5 +21,6 @@ $(document).ready(function () {
     }
 
     // coding to open student detail page
+    
   });
 });
