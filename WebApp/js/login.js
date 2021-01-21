@@ -6,22 +6,22 @@ $(document).ready(function () {
       email: $("#email").val(),
     };
 
-    fetch student permission from api server
+    //fetch student permission from api server
     const response = await fetch(
       "http://localhost:3000/api/v1/users/getUserPermission",
       {
         method: "POST",
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       }
     );
     let student = await response.json();
 
-    if (student.data.length <= 0) {
+    if (!student.data) {
       alert("Please check you student ID or Email address again.");
       return;
     }
 
     // coding to open student detail page
-    
   });
 });
