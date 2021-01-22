@@ -22,6 +22,11 @@ $(document).ready(function () {
       return;
     }
 
-    // coding to open student detail page
+    // store variable to localstorage
+    // localstorage need to store in string format.
+    localStorage.setItem("studentDetail", JSON.stringify(student.data));
+
+    // open homepage in new window
+    window.open("./home.html", "_self");
   });
 });
