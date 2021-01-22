@@ -42,16 +42,21 @@ router.post("/getUserPermission", (req, res) => {
   dbConfig.database = "AIC";
 
   // get data from database
-  new mssql.ConnectionPool(dbConfig).connect().then((pool) => {
+  new mssql.ConnectionPool(dbConfig).connect().then(async (pool) => {
     // =========
     var request = pool.request();
 
+    let studentDetail;
+    let enrolmentClass;
+    let classStart = "2020-10-12";
+    let classEnd = "2020-12-31";
+
+    // execute get user info
     // input variable
     request.input("studentID", mssql.VarChar, student.studentID);
     request.input("email", mssql.VarChar, student.email);
 
-    // execute get user info
-    request
+    await request
       .query(
         "SELECT ID AS id, StudentID AS studentID, FullName AS fullName, EmailAddress AS emailAddress, AustraliaPhone AS phone, OverDue AS overdueAmount, Photo_DOCDATA AS photoData FROM STUDENT WHERE (StudentID = @studentID) AND (EmailAddress = @email)"
       )
@@ -59,18 +64,7 @@ router.post("/getUserPermission", (req, res) => {
         // return row affected back
         res.status(200);
 
-        if (result.recordset.length > 0) {
-          res.send({
-            error: false,
-            message: "get user permission successfully.",
-            data: { studentDetail: result.recordset[0] },
-          });
-        } else {
-          res.status(200).send({
-            error: true,
-            message: "This user is not in database.",
-          });
-        }
+        if (result.recordset.length > 0) studentDetail = result.recordset[0];
 
         mssql.close();
       })
@@ -79,6 +73,49 @@ router.post("/getUserPermission", (req, res) => {
         console.log(error);
         mssql.close();
       });
+
+    // if do not have studentin the database, send do not have permission back
+    if (!studentDetail) {
+      res.status(200).send({
+        error: true,
+        message: "This user is not in database.",
+      });
+      return;
+    }
+
+    // get enrolment class
+    request.input("classStart", mssql.VarChar, classStart);
+    request.input("classEnd", mssql.VarChar, classEnd);
+    await request
+      .query(
+        "SELECT TOP (100) PERCENT dbo.CLASS.ID AS class_id, dbo.CLASS.ClassName AS className, dbo.CLASS.StartDate AS classStart, dbo.CLASS.EndDate AS classEnd, dbo.UNIT.Code AS unitCode, dbo.UNIT.Name AS unitName, dbo.CLASS.Day AS deliveryDay, dbo.UNIT.ID AS unit_id FROM dbo.CLASS INNER JOIN dbo.ENROLMENT_REF ON dbo.CLASS.ID = dbo.ENROLMENT_REF.RID INNER JOIN dbo.ENROLMENT ON dbo.ENROLMENT_REF.ID = dbo.ENROLMENT.ID INNER JOIN dbo.UNIT ON dbo.CLASS.CourseUnit_RID = dbo.UNIT.ID INNER JOIN dbo.STUDENT ON dbo.ENROLMENT.Student_RID = dbo.STUDENT.ID WHERE (dbo.STUDENT.StudentID = @studentID) AND (dbo.CLASS.StartDate >= CONVERT(DATETIME, @classStart, 102)) AND (dbo.CLASS.EndDate <= CONVERT(DATETIME, @classEnd, 102)) AND (dbo.UNIT.Code <> '-') ORDER BY classStart"
+      )
+      .then((result) => {
+        // return row affected back
+        res.status(200);
+
+        if (result.recordset.length > 0) enrolmentClass = result.recordset;
+
+        mssql.close();
+      })
+      .catch((error) => {
+        res.send(error);
+        console.log(error);
+        mssql.close();
+      });
+
+    // TODO: get leraning result
+
+    // TODO: get payment detail
+
+    // send back request
+    if (student) {
+      res.send({
+        error: false,
+        message: "get user permission successfully.",
+        data: { studentDetail: studentDetail, enrolmentClass: enrolmentClass },
+      });
+    }
   });
 });
 
