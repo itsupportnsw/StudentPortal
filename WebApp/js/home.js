@@ -10,11 +10,14 @@ $(document).ready(function () {
 
   // display student detail
   $("#studentID").html(studentProfile.studentID);
+  $("#fullName").html(studentProfile.fullName);
+  $("#emailAddress").html(studentProfile.emailAddress);
+  $("#phone").html(studentProfile.phone);
 
   // display timetable
   let tableHtml;
   tableHtml =
-    "<table class='table table-hover'><thead><tr><th>No.</th><th>Class Name</th><th>Trainer</th><th>Class date</th><th>Class time</th><th>Unit Name/Course</th></tr></thead><tbody>";
+    "<table class='table table-hover'><thead><tr><th>No.</th><th>Class Name</th><th>Unit Name</th><th>Class start</th><th>Class End</th><th>Delivery day</th></tr></thead><tbody>";
 
   timetable.forEach((item, index) => {
     tableHtml +=
@@ -22,10 +25,17 @@ $(document).ready(function () {
       (index + 1) +
       "</td><td>" +
       item.className +
-      "</td><td>Dom</td><td>21/01/2021</td><td>08.30am</td><td>1234</td></tr>";
+      "</td><td>" +
+      item.unitName + 
+      "</td><td>" +
+      item.classStart +
+      "</td><td>" +
+      item.classEnd +
+      "</td></tr>";
   });
 
   tableHtml += "</tbody></table>";
 
   $("#tblTimetable").html(tableHtml);
 });
+

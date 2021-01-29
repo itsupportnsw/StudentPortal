@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="./home.css">
-    </style>
 </head>
 
 <body>
@@ -36,12 +34,15 @@
             </ul>
         </div>
     </nav>
+
+    
     <!-- Student detail -->
     <div class="container">
-        <h3>Student information</h3>
-        <table style="">
+        <h2>Student information</h2>
+        <div class="row"></div>
+        <table widht="100%" height="100%" >
             <tr>
-                <th rowspan="7"><img src="./images/iconavatar.png" class="img-circle" alt="Cinque Terre" width="150"
+                <th rowspan="5"><img src="./images/iconavatar.png" class="img-circle" alt="Cinque Terre" width="200"
                         aling></th>
             </tr>
             <tr>
@@ -52,25 +53,29 @@
             </tr>
             <tr>
                 <th>Name</th>
-                <td>Joe</td>
-            </tr>
-            <tr>
-                <th>Surname</th>
-                <td>Jackson</td>
+                <td>
+                    <div id="fullName"></div>
+                </td>
             </tr>
             <tr>
                 <th>Email Address</th>
-                <td>Abc@gmail.com</td>
+                <td>
+                    <div id="emailAddress"></div>
+                </td>
             </tr>
             <tr>
                 <th>Telphone No.</th>
-                <td>(+61 412 987 653)</td>
+                <td>
+                    <div id="phone"></div>
+                </td>
             </tr>
         </table>
     </div>
+
+
     <div class="container">
-        <h3>Timetable</h3>
-        <div id="tblTimetable"></div>
+        <h2>Timetable</h2>
+        <div class="table table-bordered table-responsive" id="tblTimetable"></div>
         <!-- <table class="table table-hover">
     <thead>
         <tr>
