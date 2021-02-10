@@ -7,62 +7,93 @@ padding:0px;
 margin:0px;
 height:100%;
 }
+
+#ProfileImg{
+    display: block;
+    margin: auto;
+    width: 20%;
+    border-radius: 50%;
+    
+}
+#icon{
+    display: block;
+    margin: auto;
+    width: 20%;
+}
 h2 {
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
     display: inline-block;
     margin: 40px 8px 10px 8px;
-    color: black;
+    color: #757575
+    
 }
+
 body{
     background-color: white;
 }
 
-@media only screen 
-    and (max-width: 760px), (min-device-width: 768px) 
-    and (max-device-width: 1024px)  {
+.Card {
+    color: #575757;
+    font-size: 16px;
+    font-style: inherit;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: 1px;
+    padding: 10px;
+    background-color:#F5FCFE;
+}
 
-		/* Force table to not be like tables anymore */
-		table, thead, tbody, th, td, tr {
-            display: block;
-		}
-    tr {
-    margin: 0 0 1rem 0;
+.col-xs-4{
+    text-align: left;
+    margin-bottom: 10px;
+    padding-left: 20%;
+    font-size: 16px;
+
+
+}
+
+.col-xs-8{
+    text-align: left;
+    margin-bottom: 10px;
+    padding-left: 20%;
+    font-size: 16px;
+
+}
+
+
+.th{
+    font-weight: 800;
+}
+
+  /* On screens that are 992px or less */
+@media screen and (max-width: 992px) {
+    .col-xs-4,.col-xs-8{
+        text-align: left;
+        margin-bottom: 15px;
+        padding-left: 5px;
+        font-size: 14px;
     }
-	td {
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-        font-size: 90%;
-        }
-        td{
-            height: 80%;
-        }
-        
-    /* Hide table headers (but not display: none;, for accessibility) */
-	thead tr {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-		}
-    td:before {
-			/* Now like a table header */
-			position: absolute;
-			/* Top/left values mimic padding */
-			top: 0;
-			left: 6px;
-            width: 45%;
-            height: 50%;
-			padding-right: 20px;
-			white-space: nowrap;
-		}
-	td:nth-of-type():before { content: "No."; }
-	td:nth-of-type(2):before { content: "Class Name"; }
-	td:nth-of-type(3):before { content: "Unit Name"; }
-	td:nth-of-type(4):before { content: "Class start"; }
-	td:nth-of-type(5):before { content: "Class End"; }
+    .card{
+        font-size: 14px;
+    }
+}
+
+  /* On screens that are 600px or less */
+@media screen and (max-width: 600px) {
+    .col-xs-4,.col-xs-8{
+        text-align: left;
+        margin-bottom: 1px;
+        font-size: 14px;
+        background-color:#FAFAFA;
+    }
+    .card{
+        font-size: 18px;
+    }
+    h2 {
+        text-align: center;
+        font-size: 18px;
+    }
 }

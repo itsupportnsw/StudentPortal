@@ -14,28 +14,20 @@ $(document).ready(function () {
   $("#emailAddress").html(studentProfile.emailAddress);
   $("#phone").html(studentProfile.phone);
 
+
+
+  
   // display timetable
-  let tableHtml;
-  tableHtml =
-    "<table class='table table-hover'><thead><tr><th>No.</th><th>Class Name</th><th>Unit Name</th><th>Class start</th><th>Class End</th><th>Delivery day</th></tr></thead><tbody>";
+  let tableHtml = "";
 
   timetable.forEach((item, index) => {
-    tableHtml +=
-      "<tr><td>" +
-      (index + 1) +
-      "</td><td>" +
-      item.className +
-      "</td><td>" +
-      item.unitName + 
-      "</td><td>" +
-      item.classStart +
-      "</td><td>" +
-      item.classEnd +
-      "</td></tr>";
+    tableHtml += '<div class="Card col12 col-md-4"><div><span class="th">Class Name : </span><span>'+
+    item.className +'</span></div><div><span class="th">Unit Name :  </span><span>'+ item.unitName +' </span></div><div><span class="th">Class Start :  </span><span>'+ item.classStart +'</span></div><div><span class="th">Class End :  </span><span>'+ item.classEnd +'</span></div></div>'
+
   });
 
-  tableHtml += "</tbody></table>";
+  console.log(tableHtml)
 
-  $("#tblTimetable").html(tableHtml);
+  
+  $("#timetalbeCard").html(tableHtml)
 });
-
