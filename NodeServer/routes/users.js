@@ -37,9 +37,23 @@ router.get("/get/all", (req, res) => {
   res.send("All user data");
 });
 
+const getDatabaseName = (college) => {
+  if (college === "AIC") return "AIC";
+  else if (college === "SC") return "NSWBC";
+};
+
 router.post("/getUserPermission", (req, res) => {
   let student = req.body;
-  dbConfig.database = "AIC";
+
+  // validate user
+  let userValidation = validateUserLogin(student);
+  if (userValidation.error)
+    res.status(401).send({
+      error: true,
+      err: userValidation,
+    });
+
+  dbConfig.database = getDatabaseName(student.college);
 
   // get data from database
   new mssql.ConnectionPool(dbConfig).connect().then(async (pool) => {
@@ -107,6 +121,26 @@ router.post("/getUserPermission", (req, res) => {
     // TODO: get leraning result
 
     // TODO: get payment detail
+    // get enrolment class
+    // request.input("classStart", mssql.VarChar, classStart);
+    // request.input("classEnd", mssql.VarChar, classEnd);
+    // await request
+    //   .query(
+    //     "SELECT TOP (100) PERCENT dbo.CLASS.ID AS class_id, dbo.CLASS.ClassName AS className, dbo.CLASS.StartDate AS classStart, dbo.CLASS.EndDate AS classEnd, dbo.UNIT.Code AS unitCode, dbo.UNIT.Name AS unitName, dbo.CLASS.Day AS deliveryDay, dbo.UNIT.ID AS unit_id FROM dbo.CLASS INNER JOIN dbo.ENROLMENT_REF ON dbo.CLASS.ID = dbo.ENROLMENT_REF.RID INNER JOIN dbo.ENROLMENT ON dbo.ENROLMENT_REF.ID = dbo.ENROLMENT.ID INNER JOIN dbo.UNIT ON dbo.CLASS.CourseUnit_RID = dbo.UNIT.ID INNER JOIN dbo.STUDENT ON dbo.ENROLMENT.Student_RID = dbo.STUDENT.ID WHERE (dbo.STUDENT.StudentID = @studentID) AND (dbo.CLASS.StartDate >= CONVERT(DATETIME, @classStart, 102)) AND (dbo.CLASS.EndDate <= CONVERT(DATETIME, @classEnd, 102)) AND (dbo.UNIT.Code <> '-') ORDER BY classStart"
+    //   )
+    //   .then((result) => {
+    //     // return row affected back
+    //     res.status(200);
+
+    //     if (result.recordset.length > 0) enrolmentClass = result.recordset;
+
+    //     mssql.close();
+    //   })
+    //   .catch((error) => {
+    //     res.send(error);
+    //     console.log(error);
+    //     mssql.close();
+    //   });
 
     // send back request
     if (student) {
@@ -119,24 +153,16 @@ router.post("/getUserPermission", (req, res) => {
   });
 });
 
-// function validateEnrolment(enrolment) {
-//   // set schema to check for each variable. each variable can set different validation
-//   const schema = {
-//     id: Joi.optional(),
-//     offerLetterDetailId: Joi.required(),
-//     studentId: Joi.required(),
-//     courseId: Joi.required(),
-//     tasId: Joi.optional(),
-//     startDate: Joi.optional(),
-//     endDate: Joi.optional(),
-//     status: Joi.required(),
-//     weeks: Joi.optional(),
-//     durationHours: Joi.optional(),
-//     note: Joi.optional(),
-//     createDate: Joi.optional(),
-//   };
-//   // return ressult of validation to result
-//   return Joi.validate(enrolment, schema);
-// }
+// validate user login
+function validateUserLogin(user) {
+  // set schema to check for each variable. each variable can set different validation
+  const schema = {
+    college: Joi.required(),
+    studentID: Joi.required(),
+    email: Joi.string().email(),
+  };
+  // return ressult of validation to result
+  return Joi.validate(user, schema);
+}
 
 module.exports = router;
