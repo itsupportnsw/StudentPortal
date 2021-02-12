@@ -281,8 +281,13 @@ h1 {
 }
 
 #icon {
+  padding-top: 5%;
   width: 30%;
 }
+.Logo{
+  padding-top: 5%;
+}
+
 
 .Landing {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
@@ -290,4 +295,18 @@ h1 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+
+.imgGrayScale{
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%);
+    opacity: 0.1;
+
+  }
+.imgAicOn{
+  filter: 0%;
+}
+.imgSydOn{
+  filter: 0%;
 }

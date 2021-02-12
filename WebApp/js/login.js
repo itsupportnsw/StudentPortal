@@ -1,4 +1,21 @@
 $(document).ready(function () {
+
+  var college = 'AIC';
+
+  $("#logoAIC").click(function(){
+    $("#logoSyd").addClass("imgGrayScale"); 
+  if ($("#logoAIC").hasClass("imgGrayScale"))
+    $("#logoAIC").removeClass("imgGrayScale");
+  }
+);
+  
+  $("#logoSyd").click(function(){
+    $("#logoAIC").addClass("imgGrayScale"); 
+  if ($("#logoSyd").hasClass("imgGrayScale"))
+    $("#logoSyd").removeClass("imgGrayScale");
+  }
+);
+  
   // set listener to login button
   $("#loginBtn").click(async function () {
     let data = {

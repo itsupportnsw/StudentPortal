@@ -15,8 +15,28 @@ $(document).ready(function () {
   $("#phone").html(studentProfile.phone);
 
 
+  // convert photo data to base64
+  function bufferToBase64(dataArray) {
+    var data = new Uint8Array(dataArray);
+    var image = Array.prototype.map.call(data, function (ch) {
+        return String.fromCharCode(ch);
+    }).join('');
+    console.log("hi");
+    return btoa(image);
+}
+console.log(studentProfile.photoData.data)
+  var base64 = bufferToBase64(studentProfile.photoData.data); 
+  var studentImage = "data:image/jpg;base64,"+base64;
 
-  
+  console.log(studentImage);
+
+  // change image source to ProfileImage. (search jquery)
+
+  $("#ProfileImg").attr('src',studentImage);
+
+console.log("hello");
+
+
   // display timetable
   let tableHtml = "";
 
