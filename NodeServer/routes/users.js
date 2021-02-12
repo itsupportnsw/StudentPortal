@@ -65,6 +65,7 @@ router.post("/getUserDetail", (req, res) => {
     let classStart = "2020-10-12";
     let classEnd = "2020-12-31";
     let paymentDetail;
+    let enrolmentResult = [];
 
     // execute get user info
     // input variable
@@ -113,9 +114,53 @@ router.post("/getUserDetail", (req, res) => {
         mssql.close();
       });
 
-    // TODO: get leraning result
+    // TODO: get enrolment and result
+    let tmpEnrolment = [];
+    request.input("studentID", mssql.VarChar, student.studentID);
+    await request
+      .query(
+        "SELECT TOP (100) PERCENT ENROLMENT.ID as enrolId, COURSE.Code AS courseCode, COURSE.Name AS courseName, ENROLMENT.StartDate, ENROLMENT.EndDate, ENROLMENT.Status, ENROLMENT.CurrentAttendaceWithLeave FROM ENROLMENT INNER JOIN STUDENT ON ENROLMENT.Student_RID = STUDENT.ID INNER JOIN COURSE ON ENROLMENT.Course_RID = COURSE.ID WHERE (STUDENT.StudentID = @studentID)"
+      )
+      .then((result) => {
+        if (result.recordset.length > 0) tmpEnrolment = result.recordset;
 
-    // TODO: get payment detail
+        mssql.close();
+      })
+      .catch((error) => {
+        res.send(error);
+        console.log(error);
+        mssql.close();
+      });
+
+    let tmpResult = [];
+    request.input("studentID", mssql.VarChar, student.studentID);
+    await request
+      .query(
+        "SELECT TOP (100) PERCENT ENROLMENT.ID AS enrolId, UNIT.Code AS unitCode, UNIT.Name AS unitName, COURSERESULT.Name AS result, CLASS.StartDate AS classStartDate, CLASS.EndDate AS classEndDate FROM ENROLMENT INNER JOIN STUDENT ON ENROLMENT.Student_RID = STUDENT.ID INNER JOIN STUDENTRESULT ON ENROLMENT.ID = STUDENTRESULT.Enrolment_RID INNER JOIN UNIT ON STUDENTRESULT.Unit_RID = UNIT.ID INNER JOIN COURSERESULT ON STUDENTRESULT.Result_RID = COURSERESULT.ID INNER JOIN CLASS ON STUDENTRESULT.Class_RID = CLASS.ID WHERE (STUDENT.StudentID = @studentID) ORDER BY classStartDate, classEndDate"
+      )
+      .then((result) => {
+        if (result.recordset.length > 0) tmpResult = result.recordset;
+
+        mssql.close();
+      })
+      .catch((error) => {
+        res.send(error);
+        console.log(error);
+        mssql.close();
+      });
+
+    for (let i = 0; i < tmpEnrolment.length; i++) {
+      let tmpR = tmpResult.filter((item) => {
+        return item.enrolId === tmpEnrolment[i].enrolId;
+      });
+      let tmpE = {
+        enrolment: tmpEnrolment[i],
+        unitResult: tmpR,
+      };
+      enrolmentResult.push(tmpE);
+    }
+
+    // get payment detail
     request.input("studentID", mssql.VarChar, student.studentID);
     await request
       .query(
@@ -141,6 +186,7 @@ router.post("/getUserDetail", (req, res) => {
           studentDetail: studentDetail,
           enrolmentClass: enrolmentClass,
           paymentDetail: paymentDetail,
+          enrolmentResult: enrolmentResult,
         },
       });
     }
