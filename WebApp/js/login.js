@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     //fetch student permission from api server
     const response = await fetch(
-      "http://localhost:3000/api/v1/users/getUserPermission",
+      "http://localhost:3000/api/v1/users/getUserDetail",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

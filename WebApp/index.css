@@ -101,7 +101,9 @@ input[type="reset"] {
 input[type="button"]:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover {
-  background-color: #39ace7;
+  background-color: #e6990a;
+  color: #000000;
+  cursor: pointer;
 }
 
 input[type="button"]:active,
