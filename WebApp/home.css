@@ -1,99 +1,107 @@
-.navbar{
-    color: white;
-    background-color: #021e2c;
+.navbar {
+  color: white;
+  background-color: #021e2c;
 }
-html, body{
-padding:0px;
-margin:0px;
-height:100%;
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  background-color: white;
 }
 
-#ProfileImg{
-    display: block;
-    margin: auto;
-    width: 20%;
-    border-radius: 50%;
-    
+#ProfileImg {
+  display: block;
+  width: 60%;
+  border-radius: 50%;
+  margin-right: 0px;
+  margin:auto;
+
 }
-#icon{
-    display: block;
-    margin: auto;
-    width: 20%;
+#icon {
+  display: block;
+  margin: auto;
+  width: 20%;
 }
 h2 {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 40px 8px 10px 8px;
-    color: #757575
-    
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color:black;
 }
 
-body{
-    background-color: white;
+body {
+  background-color: white;
 }
 
 .Card {
-    color: #575757;
-    font-size: 16px;
-    font-style: inherit;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    border: 1px;
-    padding: 10px;
-    background-color:#F5FCFE;
-}
-
-.col-xs-4{
-    text-align: left;
-    margin-bottom: 10px;
-    padding-left: 20%;
-    font-size: 16px;
-
+  color: #575757;
+  font-size: 16px;
+  font-style: inherit;
+  margin-bottom: 5px;
+  border: 1px;
+  background-color: #f5fcfe;
 
 }
-
-.col-xs-8{
-    text-align: left;
-    margin-bottom: 10px;
-    padding-left: 20%;
-    font-size: 16px;
-
+.col-sm-7{
+  margin-top: 10px;
 }
-
-
-.th{
-    font-weight: 800;
+.col-sm-4, 
+.col-sm-8{
+  text-align: left;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  font-size: large;
 }
-
-  /* On screens that are 992px or less */
+.th {
+  font-weight: 800;
+}
+/* On screens that are 992px or less*/
 @media screen and (max-width: 992px) {
-    .col-xs-4,.col-xs-8{
-        text-align: left;
-        margin-bottom: 15px;
-        padding-left: 5px;
-        font-size: 14px;
-    }
-    .card{
-        font-size: 14px;
-    }
+  .col-sm-4,
+  .col-sm-8 {
+    text-align: left;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    font-size: 14px;
+  }
+  .card {
+    font-size: 14px;
+  }
+  #ProfileImg {
+    display: block;
+    margin: auto;
+    width: 50%;
+  
 }
 
-  /* On screens that are 600px or less */
+/* On screens that are 600px or less */
 @media screen and (max-width: 600px) {
-    .col-xs-4,.col-xs-8{
-        text-align: left;
-        margin-bottom: 1px;
-        font-size: 14px;
-        background-color:#FAFAFA;
-    }
-    .card{
-        font-size: 18px;
-    }
-    h2 {
-        text-align: center;
-        font-size: 18px;
-    }
+  
+  .col-sm-4{
+    text-align: left;
+    margin-bottom: 1px;
+    font-size: 14px;
+    margin-left :8px;;
+  
+  }
+  .col-sm-8 {
+    text-align: left;
+    margin-bottom: 1px;
+    font-size: 14px;
+  }
+  .card {
+    font-size: 18px;
 }
+h2 {
+    text-align: center;
+    font-size: 18px;
+}
+#ProfileImg {
+  display: block;
+  margin: auto;
+  width: 40%;
+

@@ -7,6 +7,7 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  background-color: white;
 }
 
 a {
@@ -23,7 +24,7 @@ h2 {
   text-transform: uppercase;
   display: inline-block;
   margin: 40px 8px 10px 8px;
-  color: #cccccc;
+  color: #424547;
 }
 
 /* STRUCTURE */
@@ -77,7 +78,7 @@ h2.active {
 input[type="button"],
 input[type="submit"],
 input[type="reset"] {
-  background-color: #56baed;
+  background-color: red;
   border: none;
   color: white;
   padding: 15px 80px;
@@ -286,10 +287,15 @@ h1 {
   padding-top: 5%;
   width: 30%;
 }
-.Logo{
-  padding-top: 5%;
+.Logo {
+  max-width: 150px;
+  height: 100px;
+  object-fit: contain;
 }
-
+.Logo__section {
+  padding-left: 80px;
+  padding-right: 80px;
+}
 
 .Landing {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
@@ -299,16 +305,26 @@ h1 {
   background-size: cover;
 }
 
-
-.imgGrayScale{
-    -webkit-filter: grayscale(100%); 
-    filter: grayscale(100%);
-    opacity: 0.1;
-
-  }
-.imgAicOn{
+.imgGrayScale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.1;
+}
+.imgAicOn {
   filter: 0%;
 }
-.imgSydOn{
+.imgSydOn {
   filter: 0%;
+}
+
+@media screen and (max-width: 600px) {
+  .Logo {
+    max-width: 125px;
+    height: 80px;
+    object-fit: contain;
+  }
+  .Logo__section {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
