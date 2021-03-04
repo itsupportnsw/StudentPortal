@@ -46,7 +46,6 @@ console.log(studentDetail);
 
 
 
-
   // display timetable
   let tableHtml = "";
 
@@ -59,3 +58,5 @@ console.log(studentDetail);
   
   $("#timetalbeCard").html(tableHtml)
 });
+
+

@@ -62,8 +62,11 @@ router.post("/getUserDetail", (req, res) => {
 
     let studentDetail;
     let enrolmentClass;
-    let classStart = "2020-10-12";
-    let classEnd = "2020-12-31";
+    // let classStart = "2020-10-12";
+    // let classEnd = "2020-12-31";
+    let classStart = "2020-04-12";
+    let classEnd = "2020-07-31";
+
     let paymentDetail;
     let enrolmentResult = [];
 

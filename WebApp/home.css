@@ -38,12 +38,13 @@ body {
 }
 
 .Card {
-  color: #575757;
+  color: #424242;
   font-size: 16px;
   font-style: inherit;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
   border: 1px;
-  background-color: #f5fcfe;
+  background-color: #d2eef867;
 
 }
 .col-sm-7{
