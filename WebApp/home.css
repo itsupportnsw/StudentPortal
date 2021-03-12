@@ -15,22 +15,22 @@ body {
   width: 60%;
   border-radius: 50%;
   margin-right: 0px;
-  margin:auto;
-
+  margin: auto;
 }
 #icon {
   display: block;
   margin: auto;
   width: 20%;
 }
+
 h2 {
   text-align: center;
   font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
   display: inline-block;
-  margin: 40px 8px 10px 8px;
-  color:black;
+  color: black;
+  margin-bottom: 20px;
 }
 
 body {
@@ -38,71 +38,114 @@ body {
 }
 
 .Card {
-  color: #424242;
+  color: #2c2b2b;
+  border-radius: 4px;
   font-size: 16px;
   font-style: inherit;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  border: 1px;
-  background-color: #d2eef867;
-
+  margin-bottom: 5px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 5px;
+  background-color: rgb(209, 239, 252);
+  border: 1px solid rgb(215, 231, 235);
+  height: fit-content;
 }
-.col-sm-7{
+.col-sm-7 {
   margin-top: 10px;
 }
-.col-sm-4, 
-.col-sm-8{
+.col-sm-4,
+.col-sm-8 {
   text-align: left;
   margin-bottom: 15px;
   padding-left: 5px;
-  font-size: large;
+  font-size: 16px;
 }
 .th {
   font-weight: 800;
+  color: black;
 }
-/* On screens that are 992px or less*/
-@media screen and (max-width: 992px) {
-  .col-sm-4,
-  .col-sm-8 {
-    text-align: left;
-    margin-bottom: 15px;
-    padding-left: 5px;
-    font-size: 14px;
+.text {
+  padding: 2px;
+  font-size: 16px;
+}
+
+footer {
+  text-align: center;
+  -webkit-text-size-adjust: auto;
+  color: gray;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 10px;
+}
+#timetalbeCard {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+@media screen and (max-width: 1024px) {
+  #timetalbeCard {
+    margin-bottom: 5px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 30px;
   }
-  .card {
-    font-size: 14px;
-  }
+}
+@media screen and (max-width: 800px) {
   #ProfileImg {
     display: block;
     margin: auto;
-    width: 50%;
-  
+    width: 100%;
+  }
+  #timetalbeCard {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 /* On screens that are 600px or less */
 @media screen and (max-width: 600px) {
-  
-  .col-sm-4{
+  .col-sm-4 {
     text-align: left;
     margin-bottom: 1px;
     font-size: 14px;
-    margin-left :8px;;
-  
+    margin-left: 8px;
   }
   .col-sm-8 {
     text-align: left;
     margin-bottom: 1px;
     font-size: 14px;
   }
-  .card {
-    font-size: 18px;
-}
-h2 {
-    text-align: center;
-    font-size: 18px;
-}
-#ProfileImg {
-  display: block;
-  margin: auto;
-  width: 40%;
 
+  .text {
+    font-size: 14px;
+  }
+  h2 {
+    text-align: center;
+    font-size: 16px;
+  }
+  #ProfileImg {
+    display: block;
+    margin: auto;
+    width: 40%;
+  }
+  .tblDetail {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+/* On screens that are 350px or less */
+@media screen and (max-width: 350px) {
+  #logoAic {
+    width: 44px;
+  }
+  .text {
+    font-size: 14px;
+    padding-left: 5px;
+  }
+  #timetalbeCard {
+    padding: 0px;
+  }
+  .col-sm-7 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

@@ -7,15 +7,20 @@ function myFunction() {
     x.className = x.className.replace(" w3-show", "");
   }
 } 
+function formatShortDate(textDate){
+  var date = new Date(textDate);
+  let newShortDate = ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' +  date.getFullYear();
+  return newShortDate;
+}
 
 $(document).ready(function () {
   
+  var college = 'AIC'
   //   get student detail from localstorage\
   let studentDetail = JSON.parse(localStorage.getItem("studentDetail"));
-
   let studentProfile = studentDetail.studentDetail;
   let timetable = studentDetail.enrolmentClass;
- 
+  
 
 console.log(studentDetail);
   // display student detail
@@ -50,8 +55,8 @@ console.log(studentDetail);
   let tableHtml = "";
 
   timetable.forEach((item, index) => {
-    tableHtml += '<div class="Card col-12 col-md-4 "><div><span class="th">Class Name : </span><span>'+
-    item.className +'</span></div><div><span class="th">Unit Name :  </span><span>'+ item.unitName +' </span></div><div><span class="th">Class Start :  </span><span>'+ item.classStart +'</span></div><div><span class="th">Class End :  </span><span>'+ item.classEnd +'</span></div></div>'
+    tableHtml += '<div class="Card col-md-4 "><div class="text"><span class="th">Class Name : </span><span>'+
+    item.className +'</span></div><div class="text"><span class="th">Unit Name :  </span><span>'+ item.unitName +' </span></div><div class="text"><span class="th">Class Start :  </span><span>'+ formatShortDate(item.classStart) +'</span></div><div class="text"><span class="th">Class End :  </span><span>'+ formatShortDate(item.classEnd) +'</span></div></div>'
 
   });
 
